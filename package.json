@@ -1,0 +1,23 @@
+{
+  "name": "url-shortner-analyzer",
+  "version": "1.0.0",
+  "description": "A URL shortner service that shortens url as well as keeps realtime track of clicked IP &amp; Counts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geekcoderr/URL-shortner-analyzer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geekcoderr/URL-shortner-analyzer/issues"
+  },
+  "homepage": "https://github.com/geekcoderr/URL-shortner-analyzer#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.2.3"
+  }
+}

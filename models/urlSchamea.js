@@ -10,7 +10,7 @@ const urlSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    visitHistory:[{timestamp:{type:Number},ipAddress:{type:String}}],
+    visitHistory:[{timestamp:{type:String},ipAddress:{type:String}}],
 },
 {
     timestamps:true,

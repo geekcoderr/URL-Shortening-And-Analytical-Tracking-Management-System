@@ -7,6 +7,13 @@ const databaseName = 'urldb';
 const URL = require('./models/urlSchamea');
 mongoInit(`mongodb://127.0.0.1:27017/${databaseName}`);
 
+const getDateTimeFromTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    const formattedDateTime = date.toLocaleString(); // Converts date to local date and time string
+
+    return formattedDateTime;
+};
+
 app.use(express.json());
 
 app.use('/url', urlRoute);
@@ -14,16 +21,16 @@ app.use('/url', urlRoute);
 app.use('/:shortId', async (req, res) => {
     const shortId = req.params.shortId;
     const entry = await URL.findOneAndUpdate({
-        shortId:shortId,
+        shortId: shortId,
     },
-    {
-        $push:{
-            visitHistory: {
-                timestamp: Date.now(),
-                ipAddress: req.ip,
+        {
+            $push: {
+                visitHistory: {
+                    timestamp: getDateTimeFromTimestamp(Date.now()),
+                    ipAddress: req.ip,
+                },
             },
-        },
-    });
+        });
     res.redirect(entry.redirectUrl);
 });
 

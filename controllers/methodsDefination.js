@@ -1,7 +1,7 @@
 const shortIds = require('shortid');
 const URL = require('../models/urlSchamea');
 
-async function GenerateNewShortURL(req, res) {
+async function GenerateNewShortURLByPost(req, res) {
     const body = req.body;
     if (!body.url) {
         return res.status(400).json({ error: "Url field is required" });
@@ -15,6 +15,21 @@ async function GenerateNewShortURL(req, res) {
     return res.json({ id: shortid });
 };
 
+
+// Function for handeling data storage and id genration from http GET request if needed
+async function GenerateNewShortURLByGet(req, res) {
+    const url = req.query.url;
+    if (!url) {
+        return res.status(400).json({ error: "Url field is required" });
+    };
+    const shortid = shortIds();
+    await URL.create({
+        shortId: shortid,
+        redirectUrl: url,
+        visitHistory: [],
+    });
+    return res.json({ id: shortid });
+};
 
 
 async function getAllAnalyticsHTML(req, res) {
@@ -57,7 +72,8 @@ async function getAnalyticsByshortId(req, res) {
 
 
 module.exports = {
-    GenerateNewShortURL,
+    GenerateNewShortURLByGet,
+    GenerateNewShortURLByPost,
     getAnalyticsByshortId,
     getAllAnalyticsHTML,
     getAllAnalyticsJSON,

@@ -9,16 +9,19 @@ mongoInit(`mongodb://127.0.0.1:27017/${databaseName}`);
 const os = require('os');
 
 const getIPAddress = () => {
-  const interfaces = os.networkInterfaces();
-  for (const interfaceName in interfaces) {
-    const interface = interfaces[interfaceName];
-    for (const { address, family, internal } of interface) {
-      if (family === 'IPv4' && !internal) {
-        return address;
-      }
+    const interfaces = os.networkInterfaces();
+    for (const interfaceName in interfaces) {
+        const interface = interfaces[interfaceName];
+        for (const { address, family, internal } of interface) {
+            if (family === 'IPv4' && !internal) {
+                // If the address is in the format ::ffff:112.196.62.5, extract the IPv4 portion
+                const ipv4Address = address.includes('::ffff:') ? address.split(':').pop() : address;
+                return ipv4Address;
+            }
+        }
     }
-  }
 };
+
 
 
 const cors = require('cors');

@@ -7,6 +7,10 @@ const databaseName = 'urldb';
 const URL = require('./models/urlSchamea');
 mongoInit(`mongodb://127.0.0.1:27017/${databaseName}`);
 
+const cors = require('cors');
+app.use(cors());
+
+
 const getDateTimeFromTimestamp = (timestamp) => {
     const date = new Date(timestamp);
     const formattedDateTime = date.toLocaleString(); // Converts date to local date and time string

@@ -6,6 +6,20 @@ const { mongoInit } = require('./connect');
 const databaseName = 'urldb';
 const URL = require('./models/urlSchamea');
 mongoInit(`mongodb://127.0.0.1:27017/${databaseName}`);
+const os = require('os');
+
+const getIPAddress = () => {
+  const interfaces = os.networkInterfaces();
+  for (const interfaceName in interfaces) {
+    const interface = interfaces[interfaceName];
+    for (const { address, family, internal } of interface) {
+      if (family === 'IPv4' && !internal) {
+        return address;
+      }
+    }
+  }
+};
+
 
 const cors = require('cors');
 app.use(cors());
@@ -39,5 +53,6 @@ app.use('/:shortId', async (req, res, next) => {
 
 });
 
+const ipAddress = getIPAddress();
 
-app.listen(PORT, () => console.log(`Server Started on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server Started on http://${ipAddress}:${PORT}`));

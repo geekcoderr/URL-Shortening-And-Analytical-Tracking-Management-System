@@ -1,5 +1,7 @@
 // Fetch data from the endpoint
-axios.get('http://localhost:8000/url/analytics/api')
+const maschineIp='localhost';
+
+axios.get(`http://${maschineIp}:8000/url/analytics/api`)
 .then(response => {
   // Extract data from the response
   const data = response.data;
@@ -18,7 +20,7 @@ axios.get('http://localhost:8000/url/analytics/api')
     const urlDiv = document.createElement('div');
     urlDiv.classList.add('analytics-item');
     urlDiv.innerHTML = `
-      <h3>Short-ID URL: <a href="http://localhost:8000/${url.shortId}">http://localhost:8000/${url.shortId}</a></h3>
+      <h3>Short-ID URL: <a href="http://${maschineIp}:8000/${url.shortId}">http://${maschineIp}:8000/${url.shortId}</a></h3>
       <p>Clicks: <span style="color: #2196f3;">${url.Clicks}</span></p>
       <p>Visits: <span style="color: #4caf50;">${url.Visits.length}</span></p>
     `;
@@ -43,4 +45,12 @@ axios.get('http://localhost:8000/url/analytics/api')
 })
 .catch(error => {
   console.error('Error fetching data:', error);
+  const data = response.data;
+
+  // Create HTML elements dynamically based on the data
+  const analyticsDiv = document.getElementById('analytics');
+  const totalRedirectionsDiv = document.createElement('div');
+  totalRedirectionsDiv.classList.add('analytics-item');
+  totalRedirectionsDiv.innerHTML=`Database is Empty or Server is not Running`;
+  analyticsDiv.appendChild(totalRedirectionsDiv);
 });

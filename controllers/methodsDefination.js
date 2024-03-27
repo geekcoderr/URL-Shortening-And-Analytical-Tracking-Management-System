@@ -15,26 +15,19 @@ async function GenerateNewShortURL(req, res) {
     return res.json({ id: shortid });
 };
 
-async function getAnalyticsByshortId(req, res) {
-    const shortId = req.params.shortId;
-    const result = await URL.findOne({shortId: shortId});
-    return res.status(200).json({
-        totalClicks: result.visitHistory.length,
-        analytics: result.visitHistory,
-    });
-};
+
 
 async function getAllAnalyticsHTML(req, res) {
     const result = await URL.find({});
     let html = `
-    <short>Total Redirections: ${result.length}</short>
-    </br>    
-    <ul>
-    ${result.map((data) => `<ul>
-    <short> @Redirect-ID: ${data.shortId} has ${data.visitHistory.length} Clicks </short></br>
-    ${(data.visitHistory).map((vdata) => `<li>${vdata}</li>`)}
-    </ul>`)}
-    </ul>
+    <H2>Total Redirections: ${result.length}</H2>
+    </br>
+    <ol type="1">
+    ${result.map((data) => `<li>
+    <H4> Redirect-ID: [${data.shortId}] >> has (${data.visitHistory.length}) CLICKS </H4>
+    ${(data.visitHistory).map((vdata) => `DateTime: ${vdata.timestamp} from IP-Address ${vdata.ipAddress}</br>`).join(',')}
+    `).join('')}</li>
+    </ol>
     `;
     return res.status(200).send(html);
 };
@@ -53,9 +46,19 @@ async function getAllAnalyticsJSON(req, res) {
     }]);
 };
 
+async function getAnalyticsByshortId(req, res) {
+    const shortId = req.params.shortId;
+    const result = await URL.findOne({ shortId });
+    return res.status(200).json({
+        totalClicks: result.visitHistory.length,
+        analytics: result.visitHistory,
+    });
+};
+
+
 module.exports = {
     GenerateNewShortURL,
-    getAllAnalyticsHTML,
     getAnalyticsByshortId,
+    getAllAnalyticsHTML,
     getAllAnalyticsJSON,
 };

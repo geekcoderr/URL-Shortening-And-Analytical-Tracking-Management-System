@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 8001;
+const PORT = 8000;
 const urlRoute = require('./routes/url');
 const { mongoInit } = require('./connect');
 const databaseName = 'urldb';
@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/url', urlRoute);
 
-app.use('/:shortId', async (req, res) => {
+app.use('/:shortId', async (req, res, next) => {
     const shortId = req.params.shortId;
     const entry = await URL.findOneAndUpdate({
         shortId: shortId,
@@ -31,7 +31,8 @@ app.use('/:shortId', async (req, res) => {
                 },
             },
         });
-    res.redirect(entry.redirectUrl);
+    res.redirect(entry?.redirectUrl);
+
 });
 
 

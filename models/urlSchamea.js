@@ -1,22 +1,22 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-const urlSchema=new mongoose.Schema({
-    shortId:{
-        type:String,
-        required:true,
-        unique:true,
+const urlSchema = new mongoose.Schema({
+    shortId: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    redirectUrl:{
-        type:String,
-        required:true,
+    redirectUrl: {
+        type: String,
+        required: true,
     },
-    visitHistory:[{timestamp:{type:String},ipAddress:{type:String}}],
+    visitHistory: [{ timestamp: { type: String }, ipAddress: { type: String } }],
 },
-{
-    timestamps:true,
-}
-    );
+    {
+        timestamps: true,
+    }
+);
 
-const URL=mongoose.model("url",urlSchema);
+const URL = mongoose.model("url", urlSchema);
 
-module.exports=URL;
+module.exports = URL;

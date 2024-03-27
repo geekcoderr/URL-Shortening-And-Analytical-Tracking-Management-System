@@ -48,7 +48,7 @@ app.use('/:shortId', async (req, res, next) => {
             $push: {
                 visitHistory: {
                     timestamp: getDateTimeFromTimestamp(Date.now()),
-                    ipAddress: req.ip,
+                    ipAddress: req.ip.includes('::ffff:') ? req.ip.split(':').pop() : req.ip,
                 },
             },
         });

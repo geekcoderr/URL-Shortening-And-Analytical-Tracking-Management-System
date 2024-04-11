@@ -9,6 +9,7 @@ const urlSchema = new mongoose.Schema({
     redirectUrl: {
         type: String,
         required: true,
+        unique:true,
     },
     visitHistory: [{ timestamp: { type: String }, ipAddress: { type: String } }],
 },

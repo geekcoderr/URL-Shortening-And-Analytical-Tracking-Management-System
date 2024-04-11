@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Analytics</title>
+<link rel="stylesheet" href="./index.css">
+<style>
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    background-image: url('../Dashbord/roomy-loft-with-deep-wood-floors-matte-black-brick-wall.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 80px;
+  }
+
+  /* Card styles */
+  .card {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff6b6b, #ffa500, #ffff00, #00ff00, #00ffff, #0080ff, #ff00ff);
+    background-size: 200% 200%;
+    animation: cardGradient 10s ease infinite;
+    z-index: -1;
+  }
+
+  @keyframes cardGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .card h2 {
+    margin-top: 0;
+    color: #0d6efd;
+
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
+  }
+
+  .card p {
+    margin: 10px 0;
+    color: #6c757d;
+    animation: typewriter 2s steps(20);
+    max-width: 87%;
+  }
+
+  .card a {
+    color: #198754;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .card a:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+  }
+
+  .delete-button {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    right: 30px;
+    width: 84px;
+    height: 84px;
+    background-image: url('./delete_4041994.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .delete-button:hover {
+    transform: scale(1.2);
+    mix-blend-mode: multiply;
+  }
+
+  /* Navbar styles */
+  .navbar {
+    background-color: #2c3e50;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .navbar a:hover {
+    background-color: #34495e;
+    color: white;
+    transform: scale(1.1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  .navbar a.active {
+    background-color: #1abc9c;
+    color: white;
+  }
+
+  .card-number {
+    background-color: #2c3e50;
+    padding: 10px;
+    color: #ffa500;
+    border-radius: 5px;
+    padding-left: 20px;
+  }
+  #shortner{
+    color:#1abc9c;
+    font-weight: 900;
+    font-family:Arial, Helvetica, sans-serif;
+
+  }
+
+  /* Visit info styling */
+  .visit-info {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .visit-info li {
+    margin-bottom: 5px;
+  }
+
+  .visit-info .timestamp {
+    color: #666;
+    font-size: 14px;
+  }
+
+  .visit-info .ip-address {
+    color: #888;
+    font-size: 14px;
+  }
+
+  .visit-info {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .visit-info li {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    max-width: 40%;
+    background-color: #34495e;
+  }
+
+  .visit-info .timestamp {
+    color: #ff8c00;
+    font-size: 14px;
+    font-weight: bold;
+    font-weight: 600;
+  }
+
+  .visit-info .ip-address {
+    color: #ff3737;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  #key{
+    font-weight: 900;
+    font-size: 20px;
+  }
+  #keyval{
+    font-size: 25px;
+    font-weight: 700;
+  }
+  #ip{
+    color: #00ff00;
+  }
+  #time{
+    color: #ffd900;
+  }
+  #header{
+    padding: 10px;
+    background-color: #FBAB7E;
+background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+border-radius: 10px;
+color:#34495e;
+font-weight: 700;
+
+  }
+</style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="http://localhost:5500/URL-shortner-analyzer/views/Dashbord/" target="_blank" id="shortner">shorTner</a>
+    <a href="http://localhost:5500/URL-shortner-analyzer/views/ControlDashbord/">Admin Dashboard</a>
+    <a href="#" class="active" >Redirection Analytics</a>
+    <a href="http://localhost:5500/URL-shortner-analyzer/views/BYID/">Search ID Info</a>
+    <!-- Add more options as needed -->
+  </div>
+  <div class="container" id="analytics">
+    <!-- Cards will be dynamically generated here -->
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const maschineIp = 'localhost';
+
+  axios.get(`http://${maschineIp}:8000/url/analytics/api`)
+    .then(response => {
+      // Extract data from the response
+      const data = response.data;
+
+      // Create HTML elements dynamically based on the data
+      const analyticsDiv = document.getElementById('analytics');
+
+      // Display total redirections
+      const totalRedirectionsDiv = document.createElement('div');
+      totalRedirectionsDiv.classList.add('card');
+      totalRedirectionsDiv.innerHTML = `
+        <h2>Total Redirections: <span style="color: #ff5722;">${data[0]['Total-Redirections']}</span></h2>
+      `;
+      analyticsDiv.appendChild(totalRedirectionsDiv);
+
+      // Display analytics for each URL
+      data[1]['analytics'].forEach(url => {
+        const urlDiv = document.createElement('div');
+        urlDiv.classList.add('card');
+        urlDiv.innerHTML = `
+          <h2 id="header">Redirection URL: <a href="http://${maschineIp}:8000/${url.shortId}">http://${maschineIp}:8000/${url.shortId}</a></h2>
+          <p><b id="key">Clicks : </b><span id="keyval" style="color: #2196f3;">${url.Clicks}</span></p>
+          <p><b id="key">Visits : </b> <span id="keyval" style="color: #4caf50;">${url.Visits.length}</span></p>
+        `;
+
+        // Check if there are visits and display them if available
+        if (url.Visits.length > 0) {
+          const visitsList = document.createElement('ul');
+          visitsList.classList.add('visit-info');
+          url.Visits.forEach(visit => {
+            const visitItem = document.createElement('li');
+            visitItem.innerHTML = `
+              <span class="timestamp">Date & Time : <code id="time">${new Date(visit.timestamp).toLocaleString()}</code></span><br>
+              <span class="ip-address">IP Address: <code id="ip">${visit.ipAddress}</code></span>
+            `;
+            visitsList.appendChild(visitItem);
+          });
+          urlDiv.appendChild(visitsList);
+        }
+
+        analyticsDiv.appendChild(urlDiv);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      const analyticsDiv = document.getElementById('analytics');
+      const totalRedirectionsDiv = document.createElement('div');
+      totalRedirectionsDiv.classList.add('card');
+      totalRedirectionsDiv.innerHTML = `Database is Empty or Server is not Running`;
+      analyticsDiv.appendChild(totalRedirectionsDiv);
+    });
+</script>
+</body>
+</html>

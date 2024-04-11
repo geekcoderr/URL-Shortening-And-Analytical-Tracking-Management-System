@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/ico" href="../favicon.png">
+  <title>Short-Id Info</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      background-image: url('../Dashbord/roomy-loft-with-deep-wood-floors-matte-black-brick-wall.jpg');
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-top: 80px;
+    }
+
+    /* Card styles */
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      
+    }
+
+    .card:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff6b6b, #ffa500, #ffff00, #00ff00, #00ffff, #0080ff, #ff00ff);
+      background-size: 200% 200%;
+      animation: cardGradient 10s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes cardGradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+
+    @keyframes typewriter {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    .card p {
+      margin: 10px 0;
+      color: #6c757d;
+      animation: typewriter 2s steps(20);
+      max-width: 87%;
+    }
+
+    .card a {
+      color: #198754;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .card a:hover {
+      color: #0d6efd;
+      text-decoration: underline;
+    }
+
+    .delete-button {
+      position: absolute;
+      top: 50%;
+      bottom: 50%;
+      right: 30px;
+      width: 84px;
+      height: 84px;
+      background-image: url('./delete_4041994.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .delete-button:hover {
+      transform: scale(1.2);
+      mix-blend-mode: multiply;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: #2c3e50;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: #34495e;
+      color: white;
+      transform: scale(1.1);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .navbar a.active {
+      background-color: #1abc9c;
+      color: white;
+    }
+
+    .card-number {
+      background-color: #2c3e50;
+      padding: 10px;
+      color: #ffa500;
+      border-radius: 5px;
+      padding-left: 20px;
+    }
+
+    #shortner {
+      color: #1abc9c;
+      font-weight: 900;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .error {
+      color: #ff5722;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .input-container input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+      width: 300px;
+      background-color: #f5f5f5;
+      color: #333;
+      box-shadow: 0 8px 12px rgba(101, 101, 101, 0.4);
+    }
+
+    .input-container button {
+      padding: 10px 20px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .input-container button:hover {
+      background-color: #148f77;
+    }
+    #header {
+        text-align: center;
+        margin-bottom: 60px;
+        background-color: #ffffff98;
+        padding: 5px;
+        font-weight: 900;
+        color:#2c3e50;
+        font-size: 20px;
+        border-radius: 20px;
+      }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="../Dashbord/index.html" target="_blank" id="shortner">shorTner</a>
+    <a href="../index.html">Admin Dashboard</a>
+    <a href="../AnalyticsBord/index.html">Redirection Analytics</a>
+    <a href="#" class="active">Search ID Info</a>
+    <!-- Add more options as needed -->
+  </div>
+  <div class="container" id="analytics">
+    <div id="header">
+      <h2>Search for Complete Information about any Short ID here!</h2>
+    </div>
+    <div class="input-container">
+      <input type="text" id="shortIdInput" placeholder="Enter Short ID">
+      <button onclick="fetchAnalytics()"><b>Get Info</b></button>
+    </div>
+    <div id="analytics-content"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    function formatDateTime(dateTimeString) {
+        const dateTime = new Date(dateTimeString);
+        const date = `${dateTime.toDateString()} `;
+        const time = `${dateTime.toLocaleTimeString()}`;
+        return `${date} at ${time}`;
+      }
+    // Function to fetch analytics data
+    function fetchAnalytics() {
+      // Get the short ID from the input field
+      const shortId = document.getElementById('shortIdInput').value.trim();
+
+      // Fetch data from the server
+      axios.get(`http://localhost:8000/url/monitor/${shortId}`)
+        .then(response => {
+          // Extract data from the response
+          const data = response.data;
+
+          // Check if the data contains error
+          if (data.error) {
+            displayError(data.error);
+          } else {
+            // Create HTML elements dynamically based on the data
+            const analyticsContentDiv = document.getElementById('analytics-content');
+
+            // Create card
+            const cardDiv = document.createElement('div');
+            cardDiv.classList.add('card');
+            cardDiv.innerHTML = `
+              <h2>Short-ID: <a href="${data.analytics.redirectUrl}" target="_blank">${data.analytics.shortId}</a></h2>
+              <p><b>ID:</b> <span id="key">${data.analytics._id}</span></p>
+              <p><b>Generated URL:</b> <span id="key">http://localhost:8000/${data.analytics.shortId}</span></p>
+              <p><b>Redirection URL:</b> <span id="keyval">${data.analytics.redirectUrl}</span></p>
+              <p><b>Total Clicks:</b> <span id="keyval">${data.totalClicks}</span></p>
+              <p><b>Created At:</b> ${formatDateTime(data.analytics.createdAt)}</p>
+            <p><b>Last Updated At:</b> ${formatDateTime(data.analytics.updatedAt)}</p>
+              <p><b>Visit History:</b> <span id="keyval">${data.analytics.visitHistory.length} Visits</span></p>
+            `;
+
+            analyticsContentDiv.innerHTML = '';
+            analyticsContentDiv.appendChild(cardDiv);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          displayError('Short ID is Incorrect , Failed to get your data. Please Check again & try with correct Id.');
+        });
+
+        
+    }
+
+    // Function to display error message
+    function displayError(errorMessage) {
+      const analyticsContentDiv = document.getElementById('analytics-content');
+      const errorDiv = document.createElement('div');
+      errorDiv.classList.add('card', 'error');
+      errorDiv.textContent = errorMessage;
+      analyticsContentDiv.innerHTML = '';
+      analyticsContentDiv.appendChild(errorDiv);
+    }
+  </script>
+</body>
+</html>

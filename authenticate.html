@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <!-- Include Axios library -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      
+      const formData = new FormData(this); // Create FormData object from form
+      
+      // Convert FormData to JSON
+      const jsonData = {};
+      formData.forEach((value, key) => {
+        jsonData[key] = value;
+      });
+
+      // Send POST request using Axios to http://localhost:8000/login
+      axios.post('http://localhost:8000/login', jsonData, { withCredentials: true }) // Include cookies in the request
+      .then(response => {
+        // Handle response
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Handle error
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>

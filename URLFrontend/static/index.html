@@ -68,7 +68,6 @@
     .card h2 {
       margin-top: 0;
       color: #0d6efd;
-
     }
 
     @keyframes typewriter {
@@ -111,7 +110,6 @@
       background-repeat: no-repeat;
       cursor: pointer;
       transition: transform 0.3s ease;
-
     }
 
     .delete-button:hover {
@@ -121,6 +119,8 @@
 
     /* Navbar styles */
     .navbar {
+      display: flex;
+      justify-content: space-between;
       background-color: #2c3e50;
       overflow: hidden;
       position: fixed;
@@ -132,7 +132,6 @@
     }
 
     .navbar a {
-      float: left;
       display: block;
       color: white;
       text-align: center;
@@ -153,6 +152,11 @@
       color: white;
     }
 
+    #logout {
+      margin-left: auto;
+      background-color:#1abc9c;
+    }
+
     .card-number {
       background-color: #2c3e50;
       padding: 10px;
@@ -160,30 +164,29 @@
       border-radius: 5px;
       padding-left: 20px;
     }
-    #shortner{
-      color:#1abc9c;
-      font-weight: 900;
-      font-family:Arial, Helvetica, sans-serif;
 
+    #shortner {
+      color: #1abc9c;
+      font-weight: 900;
+      font-family: Arial, Helvetica, sans-serif;
     }
-    .logo{
+
+    .logo {
       padding-bottom: -30px;
       width: 15px;
       padding-right: 5px;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.socket.io/4.3.1/socket.io.min.js"></script>
-
 </head>
 
 <body>
-   <div class="navbar">
+  <div class="navbar">
     <a href="../Dashbord/index.html" target="_blank" id="shortner"><img src="./favicon.png" class="logo" alt="LOGO" /> shorTner</a>
     <a href="#" class="active">Admin Dashboard</a>
     <a href="../AnalyticsBord/index.html">Redirection Analytics</a>
     <a href="../BYID/index.html">Search ID Info</a>
-    <!-- Add more options as needed -->
+    <a href="#" id="logout">Logout</a>
   </div>
   <div class="container" id="analytics">
     <!-- Cards will be dynamically generated here -->
@@ -206,7 +209,7 @@
             errorDiv.innerHTML = `<p>Error deleting URL</p>`;
             document.getElementById('analytics').appendChild(errorDiv);
           });
-          window.location.reload();
+        window.location.reload();
       }
     }
 
@@ -232,7 +235,6 @@
         totalRedirectionsDiv.classList.add('card');
         totalRedirectionsDiv.innerHTML = `
           <h2>Total Redirections: <span style="color: #ff5122;">${data[0]['Total-Redirections']}</span></h2>
-          <!-- <div class="delete-button"></div> -->
         `;
         analyticsDiv.appendChild(totalRedirectionsDiv);
 
@@ -241,7 +243,7 @@
           const urlDiv = document.createElement('div');
           urlDiv.classList.add('card');
           urlDiv.innerHTML = `
-          <h2 class="card-number" style="color:#ffa500">We Have this Record Serial Number :   <b style="color:tomato">${url.entryNumber}</b></h2>
+            <h2 class="card-number" style="color:#ffa500">We Have this Record Serial Number :   <b style="color:tomato">${url.entryNumber}</b></h2>
             <h2>${url.id}</h2>
             <p><b>Original URL:</b> <a href="${url.redirectUrl}" target="_blank">${url.redirectUrl}</a></p>
             <p><b>Shortened URL:</b> <a href="http://${maschineIp}:8000/${url.shortId}" target="_blank">http://${maschineIp}:8000/${url.shortId}</a></p>
@@ -259,6 +261,18 @@
         errorDiv.innerHTML = 'Database is Empty or Server is not Running';
         analyticsDiv.appendChild(errorDiv);
       });
+
+    // Logout functionality
+    document.getElementById('logout').addEventListener('click', async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/logout');
+        // Redirect to login page or handle logout success as needed
+        window.location.href = '/login'; // Redirect to login page
+      } catch (error) {
+        console.error('Error logging out:', error);
+        // Handle logout failure
+      }
+    });
   </script>
 </body>
 

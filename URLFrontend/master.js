@@ -15,10 +15,11 @@ const io = socketIO(server);
 app.use(express.json());
 app.use(cookieSession({
   name: 'session',
-  keys: ['your-secret-key'],
+  keys: ['keycoderr'],
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
+// Logout route
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
   if (req.session.user) {
@@ -31,6 +32,16 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/login');
   }
 };
+
+
+// Logout route
+app.get('/logout', (req, res) => {
+  // Clear the user session
+  req.session = null;
+  console.log('logout');
+  // Serve the logout.html page
+  res.sendFile(path.join(baseStaticFolder, 'login.html'));
+});
 
 // Serve the login page without authentication
 app.get('/login', (req, res) => {

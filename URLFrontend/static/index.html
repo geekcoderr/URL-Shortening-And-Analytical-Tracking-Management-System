@@ -192,6 +192,7 @@
     <!-- Cards will be dynamically generated here -->
   </div>
   <script>
+    const maschineIp = 'localhost';
     function onDeleteButtonClick(id) {
       const confirmation = confirm('Are you sure you want to delete this URL entry?');
       if (confirmation) {
@@ -216,7 +217,7 @@
     // Function to handle deletion of URL entry
     async function deleteUrl(id) {
       try {
-        const response = await axios.delete(`http://localhost:8000/url/del/${id}`);
+        const response = await axios.delete(`http://${maschineIp}:8000/url/del/${id}`);
         return response.data;
       } catch (error) {
         console.error('Error deleting URL:', error);
@@ -224,7 +225,6 @@
       }
     }
 
-    const maschineIp = 'localhost';
     axios.get(`http://${maschineIp}:8000/url/admin/api`)
       .then(response => {
         const data = response.data;
@@ -265,7 +265,7 @@
     // Logout functionality
     document.getElementById('logout').addEventListener('click', async () => {
       try {
-        const response = await axios.get('http://localhost:3000/logout');
+        const response = await axios.get(`http://${maschineIp}:3000/logout`);
         // Redirect to login page or handle logout success as needed
         window.location.href = '/login'; // Redirect to login page
       } catch (error) {

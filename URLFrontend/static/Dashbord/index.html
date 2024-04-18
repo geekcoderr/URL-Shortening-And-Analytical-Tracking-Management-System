@@ -207,11 +207,12 @@
     </div>
 
     <script>
+        const maschineIp='localhost';
         document.getElementById('urlForm').addEventListener('submit', function (event) {
             event.preventDefault();
             const url = document.getElementById('urlInput').value;
 
-            fetch('http://localhost:8000/url', {
+            fetch(`http://${maschineIp}:8000/url`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -239,8 +240,8 @@
                 shortenedList.appendChild(listItem);
             }
             const link = document.createElement('a');
-            link.href = `http://localhost:8000/${shortUrl}`;
-            link.textContent = `http://localhost:8000/${shortUrl}`;
+            link.href = `http://${maschineIp}:8000/${shortUrl}`;
+            link.textContent = `http://${maschineIp}:8000/${shortUrl}`;
             link.target=`_blank`;
             listItem.innerHTML = ''; // Clear existing content
             listItem.appendChild(link); // Add the link to the list item

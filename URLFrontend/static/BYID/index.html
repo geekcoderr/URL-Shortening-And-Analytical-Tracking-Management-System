@@ -275,6 +275,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    const maschineIp='localhost';
     function formatDateTime(dateTimeString) {
         const dateTime = new Date(dateTimeString);
         const date = `${dateTime.toDateString()} `;
@@ -287,7 +288,7 @@
       const shortId = document.getElementById('shortIdInput').value.trim();
 
       // Fetch data from the server
-      axios.get(`http://localhost:8000/url/monitor/${shortId}`)
+      axios.get(`http://${maschineIp}:8000/url/monitor/${shortId}`)
         .then(response => {
           // Extract data from the response
           const data = response.data;
@@ -305,7 +306,7 @@
             cardDiv.innerHTML = `
               <h2>Short-ID: <a href="${data.analytics.redirectUrl}" target="_blank">${data.analytics.shortId}</a></h2>
               <p><b>ID:</b> <span id="key">${data.analytics._id}</span></p>
-              <p><b>Generated URL:</b> <span id="key">http://localhost:8000/${data.analytics.shortId}</span></p>
+              <p><b>Generated URL:</b> <span id="key">http://${maschineIp}:8000/${data.analytics.shortId}</span></p>
               <p><b>Redirection URL:</b> <span id="keyval">${data.analytics.redirectUrl}</span></p>
               <p><b>Total Clicks:</b> <span id="keyval">${data.totalClicks}</span></p>
               <p><b>Created At:</b> ${formatDateTime(data.analytics.createdAt)}</p>
@@ -337,7 +338,7 @@
     // Logout functionality
 document.getElementById('logout').addEventListener('click', async () => {
   try {
-    const response = await axios.get('http://localhost:3000/logout');
+    const response = await axios.get(`http://${maschineIp}:3000/logout`);
     // Redirect to login page or handle logout success as needed
     window.location.href = '/login'; // Redirect to login page
   } catch (error) {
